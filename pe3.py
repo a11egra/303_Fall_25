@@ -1,5 +1,5 @@
 #
-# FUNCTIONS: A
+# FUNCTIONS
 #
 
 import string
@@ -29,14 +29,10 @@ def encode(input_text,shift):
     print((alphabet,shifted_text))
     return (alphabet,shifted_text)
 
-#encode ("a", 3) # should return ([" a" , "b" , ... "z"] , "d")
-#encode (" abc", 4 ) # should return ([" a" , "b" , ... "z"] , " efg ")
-#encode (" xyz", 3 ) # should return ([" a" , "b" , ... "z"] , " abc ")
-#encode ("j!K,2?", 3) # should return ([" a" , "b" , ... "z"] , "m!n,2 ?")
-
-#
-# FUNCTIONS: B
-#
+encode ("a", 3) # should return ([" a" , "b" , ... "z"] , "d")
+encode (" abc", 4 ) # should return ([" a" , "b" , ... "z"] , " efg ")
+encode (" xyz", 3 ) # should return ([" a" , "b" , ... "z"] , " abc ")
+encode ("j!K,2?", 3) # should return ([" a" , "b" , ... "z"] , "m!n,2 ?")
 
 def decode(input_text,shift):
     shifted_text = ''
@@ -62,13 +58,13 @@ def decode(input_text,shift):
     print((alphabet,shifted_text))
     return (alphabet,shifted_text)
 
-#decode ("d", 3) # should return "a"
-#decode (" efg", 4 ) # should return " abc "
-#decode (" abc", 3 ) # should return " xyz "
-#decode ("m!n,2?", 3) # should return "j!K,2 ?"
+decode ("d", 3) # should return "a"
+decode (" efg", 4 ) # should return " abc "
+decode (" abc", 3 ) # should return " xyz "
+decode ("m!n,2?", 3) # should return "j!K,2 ?"
 
 #
-# CLASSES: A
+# CLASSES
 #
 
 import datetime
@@ -89,27 +85,32 @@ class BankAccount():
         else:
             self.balance = self.balance + self.amount
             f"Your updated account balance is ${self.balance}."
-            return self.balance
+        return self.balance
     
     def withdraw(self,amount):
         self.balance = self.balance - self.amount
         f"Your updated account balance is ${self.balance}."
         return self.balance
+    
+    def view_balance():
+        f"Your account balance is ${self.balance}."
+        return self.balance
 
 class SavingsAccount(BankAccount):
-        def __init__(self):
-            super().__init__()
+    def __init__(self):
+        super().__init__()
 
-        def withdraw(self,amount):
-            new_balance = self.balance - self.amount
+    def withdraw(self,amount):
+        new_balance = self.balance - self.amount
 
-            if new_balance < 0:
-                raise Exception("Your account will be overdrafted if you withdraw this amount.")
-            elif self.creation_date < datetime.date.today()-180:
-                raise Exception("Your account must be in existence for 180 days before making any withdrawals.")
-            else:
-                self.balance = new_balance 
-                f"Your updated account balance is ${self.balance}."
-                return self.balance
+        if new_balance < 0:
+            raise Exception("Your account will be overdrafted if you withdraw this amount.")
+        elif self.creation_date < datetime.date.today()-180:
+            raise Exception("Your account must be in existence for 180 days before making any withdrawals.")
+        else:
+            self.balance = new_balance 
+            f"Your updated account balance is ${self.balance}."
+    
+        return self.balance
 
 
