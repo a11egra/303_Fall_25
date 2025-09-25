@@ -9,7 +9,7 @@ upper_alphabet = list(string.ascii_uppercase)
 def encode(input_text,shift):
     shifted_text = ''
 
-    for letter in list(input_text):
+    for letter in list(input_text.lower()):
 
         alphabet = lower_alphabet
         
