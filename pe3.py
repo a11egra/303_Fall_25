@@ -107,9 +107,9 @@ class CheckingAccount(BankAccount):
         new_balance = self.balance - amount
 
         if new_balance < 0:
-            self.balance = new_balance - amount - 30
+            self.balance = new_balance - 30
         else: 
-            self.balance = self.balance - amount
+            self.balance = new_balance
 
         print(self.balance)
         return self.balance
