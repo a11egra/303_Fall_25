@@ -3,65 +3,72 @@
 #
 
 import string
-alphabet = list(string.ascii_lowercase)
+lower_alphabet = list(string.ascii_lowercase)
+upper_alphabet = list(string.ascii_uppercase)
 
 def encode(input_text,shift):
     shifted_text = ''
 
     for letter in list(input_text):
 
-        if letter in alphabet:
-
-            letter_index = alphabet.index(letter)
-            shift_index = letter_index + shift
-            
-            if shift_index < len(alphabet):
-                new_letter = alphabet[shift_index]
-            else:
-                new_index = (letter_index + shift) % len(alphabet)
-                new_letter = alphabet[new_index]
-
-            shifted_text += new_letter
-       
+        if letter in lower_alphabet:
+            alphabet = lower_alphabet
+        elif letter in upper_alphabet:
+            alphabet = upper_alphabet
         else:
-            shifted_text = shifted_text + letter
+            shifted_text += letter
+            continue
+
+        letter_index = alphabet.index(letter)
+        shift_index = letter_index + shift
+        
+        if shift_index < len(alphabet):
+            new_letter = alphabet[shift_index]
+        else:
+            new_index = (letter_index + shift) % len(alphabet)
+            new_letter = alphabet[new_index]
+
+        shifted_text += new_letter
 
     print((alphabet,shifted_text))
     return (alphabet,shifted_text)
 
-encode ("a", 3) # should return ([" a" , "b" , ... "z"] , "d")
-encode (" abc", 4 ) # should return ([" a" , "b" , ... "z"] , " efg ")
-encode (" xyz", 3 ) # should return ([" a" , "b" , ... "z"] , " abc ")
-encode ("j!K,2?", 3) # should return ([" a" , "b" , ... "z"] , "m!n,2 ?")
+#encode ("a", 3) # should return ([" a" , "b" , ... "z"] , "d")
+#encode (" abc", 4 ) # should return ([" a" , "b" , ... "z"] , " efg ")
+#encode (" xyz", 3 ) # should return ([" a" , "b" , ... "z"] , " abc ")
+#encode ("j!K,2?", 3) # should return ([" a" , "b" , ... "z"] , "m!n,2 ?")
 
 def decode(input_text,shift):
     shifted_text = ''
 
     for letter in list(input_text):
 
-        if letter in alphabet:
-
-            letter_index = alphabet.index(letter)
-            shift_index = letter_index - shift
-            
-            if shift_index < len(alphabet) and shift_index > 0:
-                new_letter = alphabet[shift_index]
-            else:
-                new_index = (letter_index - shift) % len(alphabet)
-                new_letter = alphabet[new_index]
-
-            shifted_text += new_letter
-       
+        if letter in lower_alphabet:
+            alphabet = lower_alphabet
+        elif letter in upper_alphabet:
+            alphabet = upper_alphabet
         else:
-            shifted_text = shifted_text + letter
-    
+            shifted_text += letter
+            continue
+
+        letter_index = alphabet.index(letter)
+        shift_index = letter_index - shift
+        
+        if shift_index < len(alphabet):
+            new_letter = alphabet[shift_index]
+        else:
+            new_index = (letter_index - shift) % len(alphabet)
+            new_letter = alphabet[new_index]
+
+        shifted_text += new_letter
+
     print((alphabet,shifted_text))
     return (alphabet,shifted_text)
 
-decode ("d", 3) # should return "a"
-decode (" efg", 4 ) # should return " abc "
-decode (" abc", 3 ) # should return " xyz "
-decode ("m!n,2?", 3) # should return "j!K,2 ?"
+#decode ("d", 3) # should return "a"
+#decode (" efg", 4 ) # should return " abc "
+#decode (" abc", 3 ) # should return " xyz "
+#decode ("m!N,2?", 3) # should return "j!K,2 ?"
 
 #
 # CLASSES
@@ -77,7 +84,7 @@ class BankAccount():
         if creation_date > datetime.date.today():
             raise Exception("The account creation date cannot be in the future.")
         else:
-            self.creation_date = creation_date
+            self.creation_date = datetime(creation_date)
     
     def deposit(self,amount):
         if self.amount < 0:
