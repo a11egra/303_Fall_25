@@ -38,7 +38,7 @@ def decode(input_text,shift):
                 letter_index = upper_alphabet.index(letter)
                 shift_index = (letter_index - shift) % len(upper_alphabet)
                 new_letter = upper_alphabet[shift_index]
-            elif letter.islower:
+            elif letter.islower():
                 letter_index = lower_alphabet.index(letter)
                 shift_index = (letter_index - shift) % len(lower_alphabet)
                 new_letter = lower_alphabet[shift_index]
@@ -72,51 +72,41 @@ class BankAccount():
             self.creation_date = creation_date
     
     def deposit(self,amount):
-        if amount < 0:
-            raise Exception("You may not deposit negative amounts.")
-        else:
+        if amount > 0:
             self.balance = self.balance + amount
-            #f"Your updated account balance is ${self.balance}."
+        print(self.balance)
         return self.balance
     
     def withdraw(self,amount):
         self.balance = self.balance - amount
-        #f"Your updated account balance is ${self.balance}."
+        print(self.balance)
         return self.balance
     
     def view_balance(self):
-        #f"Your account balance is ${self.balance}."
+        print(self.balance)
         return self.balance
 
 class SavingsAccount(BankAccount):
-    def __init__(self,name,creation_date,balance):
+    def __init__(self,name,ID,creation_date,balance):
         super().__init__()
 
     def withdraw(self,amount):
+        datelimit = datetime.date.today() - datetime.timedelta(days=180)
         new_balance = self.balance - amount
+        if new_balance > 0 and self.creation_date > datelimit:
+            self.balance = new_balance
 
-        if new_balance < 0:
-            raise Exception("Your account will be overdrafted if you withdraw this amount.")
-        elif self.creation_date < date(datetime.date.today()-180):
-            raise Exception("Your account must be in existence for 180 days before making any withdrawals.")
-        else:
-            self.balance = new_balance 
-            #f"Your updated account balance is ${self.balance}."
-    
+        print(self.balance)
         return self.balance
 
 class CheckingAccount(BankAccount):
-    def __init__(self,name,creation_date,balance):
+    def __init__(self,name,ID,creation_date,balance):
         super().__init__()
 
-    def withdraw(self,amount):
+    def withdraw(self, amount):
         new_balance = self.balance - amount
-
         if new_balance < 0:
             self.balance = new_balance - 30
-            #f"Your account is overdrafted. You have been charged an additional $30 fee."
-        else:
-            self.balance = new_balance 
-        
-        #f"Your updated account balance is ${self.balance}."
+
+        print(self.balance)
         return self.balance
