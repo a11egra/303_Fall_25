@@ -51,7 +51,7 @@ def decode(input_text,shift):
         shifted_text += new_letter
 
     #print((lower_alphabet,shifted_text))
-    return (lower_alphabet,shifted_text)
+    return shifted_text
 
 #decode ("d", 3) # should return "a"
 #decode (" efg", 4 ) # should return " abc "
