@@ -113,4 +113,18 @@ class SavingsAccount(BankAccount):
     
         return self.balance
 
+class CheckingAccount(BankAccount):
+    def __init__(self):
+        super().__init__()
 
+    def withdraw(self,amount):
+        new_balance = self.balance - self.amount
+
+        if new_balance < 0:
+            self.balance = new_balance - 30
+            f"Your account is overdrafted. You have been charged an additional $30 fee."
+        else:
+            self.balance = new_balance 
+        
+        f"Your updated account balance is ${self.balance}."
+        return self.balance
