@@ -88,12 +88,12 @@ class BankAccount():
 
 class SavingsAccount(BankAccount):
     def __init__(self,name,ID,creation_date,balance):
-        super().__init__()
+        super().__init__(name,ID,creation_date,balance)
 
     def withdraw(self,amount):
         datelimit = datetime.date.today() - datetime.timedelta(days=180)
         new_balance = self.balance - amount
-        if new_balance > 0 and self.creation_date > datelimit:
+        if new_balance > 0 and self.creation_date < datelimit:
             self.balance = new_balance
 
         print(self.balance)
@@ -101,12 +101,15 @@ class SavingsAccount(BankAccount):
 
 class CheckingAccount(BankAccount):
     def __init__(self,name,ID,creation_date,balance):
-        super().__init__()
+        super().__init__(name,ID,creation_date,balance)
 
     def withdraw(self, amount):
         new_balance = self.balance - amount
+
         if new_balance < 0:
-            self.balance = new_balance - 30
+            self.balance = new_balance - amount - 30
+        else: 
+            self.balance = self.balance - amount
 
         print(self.balance)
         return self.balance
