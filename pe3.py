@@ -71,6 +71,8 @@ def decode(input_text,shift):
 # CLASSES: A
 #
 
+import datetime
+
 class BankAccount():
     def __init__(self, name="Rainy",ID="1234",creation_date=datetime.date.today(),balance=0):
         self.name = name
@@ -79,7 +81,7 @@ class BankAccount():
         if creation_date > datetime.date.today():
             raise Exception("The account creation date cannot be in the future.")
         else:
-            self.creation_date = creation_date
+            self.creation_date = datetime.date.today()
     
     def deposit(self,amount):
         if self.amount < 0:
@@ -90,6 +92,13 @@ class BankAccount():
             return self.balance
     
     def withdraw(self,amount):
+        self.balance = self.balance - self.amount
+        f"Your updated account balance is ${self.balance}."
+        return self.balance
+
+class SavingsAccount(BankAccount):
+
+        def withdraw(self,amount):
         new_balance = self.balance - self.amount
         if new_balance < 0:
             raise Exception("Your account will be overdrafted if you withdraw this amount.")
@@ -97,6 +106,5 @@ class BankAccount():
             self.balance = new_balance 
             f"Your updated account balance is ${self.balance}."
             return self.balance
-
 
 
