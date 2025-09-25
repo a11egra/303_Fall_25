@@ -11,13 +11,7 @@ def encode(input_text,shift):
 
     for letter in list(input_text):
 
-        if letter in lower_alphabet:
-            alphabet = lower_alphabet
-        elif letter in upper_alphabet:
-            alphabet = upper_alphabet
-        else:
-            shifted_text += letter
-            continue
+        alphabet = lower_alphabet
         
         letter_index = alphabet.index(letter)
         shift_index = (letter_index + shift) % len(alphabet)
