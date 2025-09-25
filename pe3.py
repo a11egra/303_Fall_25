@@ -72,22 +72,22 @@ class BankAccount():
         if creation_date > datetime.date.today():
             raise Exception("The account creation date cannot be in the future.")
         else:
-            self.creation_date = datetime(creation_date)
+            self.creation_date = creation_date
     
     def deposit(self,amount):
-        if self.amount < 0:
+        if amount < 0:
             raise Exception("You may not deposit negative amounts.")
         else:
-            self.balance = self.balance + self.amount
+            self.balance = self.balance + amount
             f"Your updated account balance is ${self.balance}."
         return self.balance
     
     def withdraw(self,amount):
-        self.balance = self.balance - self.amount
+        self.balance = self.balance - amount
         f"Your updated account balance is ${self.balance}."
         return self.balance
     
-    def view_balance():
+    def view_balance(self):
         f"Your account balance is ${self.balance}."
         return self.balance
 
@@ -96,11 +96,11 @@ class SavingsAccount(BankAccount):
         super().__init__()
 
     def withdraw(self,amount):
-        new_balance = self.balance - self.amount
+        new_balance = self.balance - amount
 
         if new_balance < 0:
             raise Exception("Your account will be overdrafted if you withdraw this amount.")
-        elif self.creation_date < datetime.date.today()-180:
+        elif self.creation_date < date(datetime.date.today()-180):
             raise Exception("Your account must be in existence for 180 days before making any withdrawals.")
         else:
             self.balance = new_balance 
@@ -113,7 +113,7 @@ class CheckingAccount(BankAccount):
         super().__init__()
 
     def withdraw(self,amount):
-        new_balance = self.balance - self.amount
+        new_balance = self.balance - amount
 
         if new_balance < 0:
             self.balance = new_balance - 30
