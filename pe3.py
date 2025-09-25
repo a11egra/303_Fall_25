@@ -18,20 +18,14 @@ def encode(input_text,shift):
         else:
             shifted_text += letter
             continue
-
-        letter_index = alphabet.index(letter)
-        shift_index = letter_index + shift
         
-        if shift_index < len(alphabet):
-            new_letter = alphabet[shift_index]
-        else:
-            new_index = (letter_index + shift) % len(alphabet)
-            new_letter = alphabet[new_index]
-
+        letter_index = alphabet.index(letter)
+        shift_index = (letter_index + shift) % len(alphabet)
+        new_letter = alphabet[shift_index]
         shifted_text += new_letter
 
-    print((alphabet,shifted_text))
-    return (alphabet,shifted_text)
+    #print((lower_alphabet,shifted_text))
+    return (lower_alphabet,shifted_text)
 
 #encode ("a", 3) # should return ([" a" , "b" , ... "z"] , "d")
 #encode (" abc", 4 ) # should return ([" a" , "b" , ... "z"] , " efg ")
@@ -52,18 +46,12 @@ def decode(input_text,shift):
             continue
 
         letter_index = alphabet.index(letter)
-        shift_index = letter_index - shift
-        
-        if shift_index < len(alphabet):
-            new_letter = alphabet[shift_index]
-        else:
-            new_index = (letter_index - shift) % len(alphabet)
-            new_letter = alphabet[new_index]
-
+        shift_index = (letter_index - shift) % len(alphabet)
+        new_letter = alphabet[shift_index]
         shifted_text += new_letter
 
-    print((alphabet,shifted_text))
-    return (alphabet,shifted_text)
+    #print((lower_alphabet,shifted_text))
+    return (lower_alphabet,shifted_text)
 
 #decode ("d", 3) # should return "a"
 #decode (" efg", 4 ) # should return " abc "
